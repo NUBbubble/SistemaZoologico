@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz Zoológico</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background-color: rgb(234,247,247);
+            display:flex;
+            height:100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+            width:260px;
+            background-color: rgb(45,102,112);
+            color:white;
+            padding:30px 20px;
+        }
+
+        .sidebar h1{
+            margin-bottom:40px;
+            font-size:28px;
+        }
+
+        .menu{
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+        }
+
+        .menu button{
+            border:none;
+            padding:15px;
+            border-radius:12px;
+            background-color: rgb(75,169,164);
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        .menu button:hover{
+            transform:scale(1.03);
+            background-color: rgb(151,206,192);
+            color:rgb(30,30,30);
+        }
+
+        /* CONTENIDO */
+
+        .main{
+            flex:1;
+            padding:40px;
+        }
+
+        .topbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+        }
+
+        .topbar h2{
+            color:rgb(45,102,112);
+            font-size:32px;
+        }
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+        }
+
+        .card{
+            background-color:white;
+            border-radius:18px;
+            padding:25px;
+            box-shadow:0px 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .card h3{
+            color:rgb(45,102,112);
+            margin-bottom:15px;
+        }
+
+        .card p{
+            color:rgb(30,30,30);
+            line-height:1.5;
+        }
+
+        .danger{
+            background-color: rgb(152,40,32);
+            color:white;
+        }
+
+        .danger h3,
+        .danger p{
+            color:white;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <h1>Zoológico</h1>
+
+        <div class="menu">
+            <button>Animales</button>
+            <button>Dietas</button>
+            <button>Cuidadores</button>
+            <button>Reportes</button>
+        </div>
+
+    </aside>
+
+    <main class="main">
+
+        <div class="topbar">
+            <h2>Panel Principal</h2>
+        </div>
+
+        <section class="cards">
+
+            <div class="card">
+                <h3>Leones</h3>
+                <p>
+                    4 leones registrados actualmente en la zona de depredadores.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Dietas Activas</h3>
+                <p>
+                    18 dietas configuradas para diferentes especies.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Cuidadores</h3>
+                <p>
+                    12 cuidadores asignados correctamente.
+                </p>
+            </div>
+
+            <div class="card danger">
+                <h3>Alerta</h3>
+                <p>
+                    Existe una dieta pendiente de revisión nutricional.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
