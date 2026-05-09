@@ -24,13 +24,6 @@ public class MenuController{
             }
         }
     }
-    public void mostrarAnimales(){
-        for (JButton boton:botones){
-            if ("Animales".equals(boton.getText())){
-                boton.addActionListener(e-> vistaPrincipal.mostrarAnimal());
-            }
-        }   
-    }
     public void mostrarDietas(){
         for (JButton boton:botones){
             if ("Dietas".equals(boton.getText())){
@@ -40,22 +33,22 @@ public class MenuController{
     }
         public void mostrarComida(){
         for (JButton boton:botones){
-            if ("Animal".equals(boton.getText())){
-                
+            if ("Comida".equals(boton.getText())){
+                boton.addActionListener(e->vistaPrincipal.mostrarComida());
             }
         }
     }
         public void mostrarCuidadores(){
         for (JButton boton:botones){
-            if ("Animal".equals(boton.getText())){
-                
+            if ("Cuidador".equals(boton.getText())){
+                boton.addActionListener(e->vistaPrincipal.mostrarCuidador());
             }
         }
     }
         public void mostrarReportes(){
         for (JButton boton:botones){
-            if ("Animal".equals(boton.getText())){
-                
+            if ("Reportes".equals(boton.getText())){
+                boton.addActionListener(e->vistaPrincipal.mostrarReportes());
             }
         }
     }

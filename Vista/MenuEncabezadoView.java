@@ -40,7 +40,7 @@ public class MenuEncabezadoView extends JPanel {
         BarraSuperior.add(titulo);
     }
     public void crearBarraOpciones(){
-        String[] opciones={"Principal","Animales","Dietas","Comida","Cuidador","Reportes"};
+        String[] opciones={"Principal","Dietas","Comida","Cuidador","Reportes"};
         BarraOpciones.setBackground(BACKGROUND);
         BarraOpciones.setLayout(new FlowLayout(FlowLayout.RIGHT,15,25));
 
@@ -57,7 +57,9 @@ public class MenuEncabezadoView extends JPanel {
             BarraOpciones.add(boton);
         }
         controlador.mostrarPrincipal();
-        controlador.mostrarAnimales();
         controlador.mostrarDietas();
+        controlador.mostrarComida();
+        controlador.mostrarCuidadores();
+        controlador.mostrarReportes();
     }
 }
