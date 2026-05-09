@@ -1,7 +1,8 @@
-import Vista.PrincipalView;
+import Controlador.PrincipalController;
 
 public class Prueba {
     public static void main(String[] args) {
-        PrincipalView ventana=new PrincipalView();
+        PrincipalController controlador=new PrincipalController();
+        controlador.iniciar();
     }
 }

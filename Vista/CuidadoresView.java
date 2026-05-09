@@ -1,5 +1,6 @@
 package Vista;
-
-public class CuidadoresView {
+import java.awt.*;
+import javax.swing.*;
+public class CuidadoresView extends JPanel{
     
 }

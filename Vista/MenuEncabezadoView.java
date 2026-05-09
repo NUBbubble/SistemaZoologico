@@ -5,11 +5,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controlador.MenuController;
+
 public class MenuEncabezadoView extends JPanel {
     private final Color BACKGROUND=new Color(31,127,149);
     private final JPanel BarraSuperior=new JPanel();
     private final JPanel BarraOpciones=new JPanel();
-    public MenuEncabezadoView(){
+    private MenuController controlador;
+    public MenuEncabezadoView(MenuController controlador){
+        this.controlador=controlador;
         setPreferredSize(new Dimension(1400,81));
         setLayout(new BorderLayout());
         titulo();
@@ -49,7 +53,11 @@ public class MenuEncabezadoView extends JPanel {
                 boton.setContentAreaFilled(false);
                 boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
                 boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                this.controlador.addButton(boton);
             BarraOpciones.add(boton);
         }
+        controlador.mostrarPrincipal();
+        controlador.mostrarAnimales();
+        controlador.mostrarDietas();
     }
 }
