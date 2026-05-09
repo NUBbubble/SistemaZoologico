@@ -31,5 +31,4 @@ public class PrincipalView extends JFrame{
             setVisible(true);
         }
 
-
 }

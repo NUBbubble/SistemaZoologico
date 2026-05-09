@@ -8,6 +8,8 @@ public abstract class Animal {
     //Consumidso
     protected int caloriasCons,proteinasCons,carbohidratosCons,grasasCons;
 
+    private Cuidador cuidador;
+
     private boolean saciado=false;
     public Animal(String nombre, String especie,int p,int c, int g){
         this.nombre=nombre;
@@ -70,6 +72,9 @@ public abstract class Animal {
     public boolean getSaciado(){
         return this.saciado;
     }
+    public Cuidador getCuidador() {
+        return cuidador;
+    }
     //  setters
     public void setCaloriasCons(int caloriasCons) {
         this.caloriasCons = caloriasCons;
@@ -106,5 +111,8 @@ public abstract class Animal {
     }
     public void setSaciado(boolean saciado) {
         this.saciado = saciado;
+    }
+    public void setCuidador(Cuidador cuidador) {
+        this.cuidador = cuidador;
     }
 }

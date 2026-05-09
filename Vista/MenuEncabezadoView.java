@@ -1,10 +1,21 @@
 package Vista;
 import java.awt.*;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MenuEncabezadoView extends JPanel {
+    private final Color BACKGROUND=new Color(31,127,149);
+    private final JPanel BarraSuperior=new JPanel();
+    private final JPanel BarraOpciones=new JPanel();
     public MenuEncabezadoView(){
         setPreferredSize(new Dimension(1400,81));
+        setLayout(new BorderLayout());
+        titulo();
+        crearBarraOpciones();
+        add(BarraSuperior, BorderLayout.WEST);
+        add(BarraOpciones, BorderLayout.CENTER);
     }
     @Override
     protected void paintComponent(Graphics g){
@@ -13,36 +24,32 @@ public class MenuEncabezadoView extends JPanel {
         dibujarFondo(g2d);
     }
     public void dibujarFondo(Graphics2D g){
-        g.setColor(new Color(31,127,149));
+        g.setColor(BACKGROUND);
         g.fillRect(0,0,getWidth(),getHeight());
     }
-    public void dibujarCuadricula(Graphics2D g){
+    public void titulo(){
+            BarraSuperior.setBackground(BACKGROUND);
+            BarraSuperior.setLayout(new FlowLayout(FlowLayout.LEFT,10,  10));
+        JLabel titulo=new JLabel("Zoologico") ;
+            titulo.setFont(new Font("Segoe UI", 1, 36)); 
+            titulo.setForeground(new Color(255, 255, 255));
+        BarraSuperior.add(titulo);
+    }
+    public void crearBarraOpciones(){
+        String[] opciones={"Principal","Animales","Dietas","Comida","Cuidador","Reportes"};
+        BarraOpciones.setBackground(BACKGROUND);
+        BarraOpciones.setLayout(new FlowLayout(FlowLayout.RIGHT,15,25));
 
-        int ancho = getWidth();
-        int alto = getHeight();
-
-        // SUBDIVISIONES DE 10px
-
-        g.setColor(new Color(70,70,70));
-
-        for(int x = 0; x <= ancho; x += 10){
-            g.drawLine(x, 0, x, alto);
-        }
-
-        for(int y = 0; y <= alto; y += 10){
-            g.drawLine(0, y, ancho, y);
-        }
-
-        // LINEAS PRINCIPALES DE 50px
-
-        g.setColor(new Color(160,160,160));
-
-        for(int x = 0; x <= ancho; x += 50){
-            g.drawLine(x, 0, x, alto);
-        }
-
-        for(int y = 0; y <= alto; y += 50){
-            g.drawLine(0, y, ancho, y);
+        for(String opcion:opciones){
+            JButton boton=new JButton(opcion);
+                boton.setForeground(Color.WHITE);
+                boton.setBackground(BACKGROUND);
+                boton.setBorderPainted(false);
+                boton.setFocusPainted(false);
+                boton.setContentAreaFilled(false);
+                boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+                boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            BarraOpciones.add(boton);
         }
     }
 }
