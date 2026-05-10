@@ -16,6 +16,9 @@ public class AnimalSeleccion {
     public void addAnimales(Animal animalEnviado){
         animales.add(animalEnviado);
     }
+    public void addAnimales(List<Animal> animales){
+        this.animales=animales;
+    }
     public void addAnimales(Animal[] animalesEnviados){
         for (Animal animal:animalesEnviados)
             animales.add(animal);

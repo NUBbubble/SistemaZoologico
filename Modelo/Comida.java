@@ -10,7 +10,9 @@ public class Comida {
         this.proteinas=p;
         this.grasas=g;
     }
-    
+    public String getDatosNut(){
+        return "Proteinas: "+this.proteinas+" Carbohidratos: "+this.carbohidratos+" Grasas: "+this.grasas+" Total Calorias: "+getCalorias();
+    }
     public int getCarbohidratos() {
         return this.carbohidratos;
     }
@@ -40,5 +42,8 @@ public class Comida {
     }
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    public int getCalorias(){
+        return (this.proteinas*4)+(this.grasas*9)+(this.carbohidratos*4);
     }
 }

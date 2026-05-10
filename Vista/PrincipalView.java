@@ -4,15 +4,21 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import Modelo.Cuidador;
+import Controlador.DietasController;
+import Controlador.PrincipalController;
+import Controlador.PrincipalSubController;
 
 import java.awt.*;
 
 public class PrincipalView extends JFrame{
-        private JPanel panelContenido;
-        private JComboBox<String> selectorCuidadores;
-        private JComboBox<String> selectorTipo;
-
-        public PrincipalView(){
+    private JPanel panelContenido;
+    private JComboBox<String> selectorCuidadores;
+    private JComboBox<String> selectorTipo;
+    private DietasController dietasController;
+    private PrincipalSubController controlador;
+        public PrincipalView(PrincipalSubController controlador){
+            controlador = new PrincipalSubController();
+            this.controlador=controlador;
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setTitle("Gestion De Alimentacion - Zoologico ");
             setName("panelPrincipal"); 
@@ -27,15 +33,15 @@ public class PrincipalView extends JFrame{
         public void agregarBarraLateral(BarraLateralView barraLateral){
             add(barraLateral,BorderLayout.WEST);
         }
-
         public void agregarMenu(MenuEncabezadoView menuEncabezado){
             add(menuEncabezado,BorderLayout.NORTH);
         }
-
         public void mostrarVentana(){
             setVisible(true);
         }
-
+        public void setDietasController(DietasController dietasController){
+            this.dietasController=dietasController;
+        }
         public void mostrarPrincipal(){
             panelContenido.removeAll();
             JPanel areaFormulario=new JPanel(new BorderLayout());
@@ -48,53 +54,85 @@ public class PrincipalView extends JFrame{
         }
         public JPanel solicitarDatosAnimal(){
             JPanel panel=new JPanel(new GridLayout(11,1,0,10));
-            int COLUMNAS=10;
             panel.setOpaque(false);
             panel.setPreferredSize(new Dimension(900,620));
             String[] Apartados={"Nombre","Especie"};
-            String[] reqNutricionales={"Calorias Req. (kcal)","Proteínas Req.  (g)","Carbohidratos Req. (g)","Grasas Req. (g)"};
+            String[] reqNutricionales={"Proteínas Req.  (g)","Carbohidratos Req. (g)","Grasas Req. (g)"};
                 
             panel.add(tittle("Datos Del Animal"));
             for(String datosAnimal: Apartados){
-                panel.add(crearApartado(datosAnimal,COLUMNAS));
+                panel.add(crearApartadoAnimals(datosAnimal));
             }
             panel.add(crearSelectorTipo());
             panel.add(tittle("Requerimientos Nutricionales"));
             for (String datosNutri:reqNutricionales)
-                panel.add(crearApartado(datosNutri, COLUMNAS));
+                // 
+                panel.add(crearApartadoReq(datosNutri));
             panel.add(tittle("Cuidador Asignado"));
             panel.add(crearSelectorCuidadores());
-            
-            //Pedir Nombre
+            panel.add(agregarButton());
+
             return panel;
         }
-        public JPanel crearApartado(String nombre,int col){
-            JPanel apartado=new JPanel(new BorderLayout());
-                apartado.setBackground(Color.WHITE);
-                apartado.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(185,200,197)),
-                    BorderFactory.createEmptyBorder(6,18,6,18)
-                ));
+        //Solo guarda los JTextFields en DatosAnimal
+        public JPanel crearApartadoAnimals(String nombre){
+            JPanel apartado=crearPanelFormato();
+                //Creacion del titulo(Apartado)
                 JLabel titulo=new JLabel(nombre);
+                    //formato
                     titulo.setPreferredSize(new Dimension(250,20));
                     titulo.setFont(new Font("Arial", Font.BOLD, 14));
                     titulo.setForeground(new Color(45,55,52));
                     titulo.setHorizontalAlignment(SwingConstants.LEFT);
-                JTextField TextoBlanco=new JTextField(col);
+                //creacion de Input al usuario(Texto en blanco)
+                JTextField TextoBlanco=new JTextField(20);
                     TextoBlanco.setHorizontalAlignment(SwingConstants.LEFT);
 
+                    //Añadirlo al controlador
+                    controlador.addTextFieldA(TextoBlanco);
+                //añadir al panel a retornar
                 apartado.add(titulo, BorderLayout.WEST);
                 apartado.add(TextoBlanco, BorderLayout.CENTER);
             return apartado;
         }
+        //Solo guarda los JTextFields en DatosReq. SIendo los requerimientos nutricionales
+        public JPanel crearApartadoReq(String nombre){
+            JPanel apartado=crearPanelFormato();
+                //Creacion del titulo(Apartado)
+                JLabel titulo=new JLabel(nombre);
+                    //formato
+                    titulo.setPreferredSize(new Dimension(250,20));
+                    titulo.setFont(new Font("Arial", Font.BOLD, 14));
+                    titulo.setForeground(new Color(45,55,52));
+                    titulo.setHorizontalAlignment(SwingConstants.LEFT);
+                //creacion de Input al usuario(Texto en blanco)
+                JTextField TextoBlanco=new JTextField(20);
+                    TextoBlanco.setHorizontalAlignment(SwingConstants.LEFT);
 
+                    //Añadirlo al controlador
+                    controlador.addTextFieldR(TextoBlanco);
+                //añadir al panel a retornar
+                apartado.add(titulo, BorderLayout.WEST);
+                apartado.add(TextoBlanco, BorderLayout.CENTER);
+            return apartado;
+        }
+        public JPanel agregarButton(){
+            JPanel panel=crearPanelFormato();
+            JButton boton=new JButton("Crear");
+                boton.setPreferredSize(new Dimension(1,20));
+                boton.setBackground(new Color(31,127,149));
+                boton.setBorderPainted(false);
+                boton.setFocusPainted(false);
+                boton.setContentAreaFilled(false);
+                boton.setHorizontalAlignment(SwingConstants.LEFT);
+                boton.setFont(new Font("Arial", Font.BOLD, 12));
+                boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                controlador.listenerAgregacion(boton);
+            panel.add(boton);
+            return panel;
+        }
         public JPanel crearSelectorCuidadores(){
-            JPanel apartado=new JPanel(new BorderLayout());
-                apartado.setBackground(Color.WHITE);
-                apartado.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(185,200,197)),
-                    BorderFactory.createEmptyBorder(6,18,6,18)
-                ));
+            JPanel apartado=crearPanelFormato();
             JLabel titulo=new JLabel("Cuidador");
                 titulo.setPreferredSize(new Dimension(250,20));
                 titulo.setFont(new Font("Arial", Font.BOLD, 14));
@@ -109,12 +147,7 @@ public class PrincipalView extends JFrame{
         }
 
         public JPanel crearSelectorTipo(){
-            JPanel apartado=new JPanel(new BorderLayout());
-                apartado.setBackground(Color.WHITE);
-                apartado.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(185,200,197)),
-                    BorderFactory.createEmptyBorder(6,18,6,18)
-                ));
+            JPanel apartado=crearPanelFormato();
             JLabel titulo=new JLabel("Tipo");
                 titulo.setPreferredSize(new Dimension(250,20));
                 titulo.setFont(new Font("Arial", Font.BOLD, 14));
@@ -124,6 +157,7 @@ public class PrincipalView extends JFrame{
                 selectorTipo.addItem("Carnivoro");
                 selectorTipo.addItem("Herviboro");
                 selectorTipo.addItem("Omnivoro");
+                controlador.setSelectorTipo(selectorTipo);
 
             apartado.add(titulo, BorderLayout.WEST);
             apartado.add(selectorTipo, BorderLayout.CENTER);
@@ -136,6 +170,18 @@ public class PrincipalView extends JFrame{
             for(Cuidador cuidador:cuidadores){
                 selectorCuidadores.addItem(cuidador.getNombre());
             }
+        }
+        public JPanel crearPanelFormato(){
+            return crearPanelFormato(6,18,6,18);
+        }
+        public JPanel crearPanelFormato(int top, int left,int bottom, int right){
+            JPanel panel= new JPanel(new BorderLayout());
+                panel.setBackground(Color.WHITE);
+                panel.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(new Color(45,55,52)),
+                    BorderFactory.createEmptyBorder(top,left,bottom,right)
+                ));
+            return panel;
         }
         public JPanel tittle(String texto){
             JPanel panel= new JPanel();
@@ -152,7 +198,7 @@ public class PrincipalView extends JFrame{
 
         public void mostrarDietas(){
             panelContenido.removeAll();
-            panelContenido.add(new DietasView(), BorderLayout.CENTER);
+            panelContenido.add(new DietasView(dietasController), BorderLayout.CENTER);
             panelContenido.revalidate();
             panelContenido.repaint();
         }

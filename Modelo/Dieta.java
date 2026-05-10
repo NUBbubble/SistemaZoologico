@@ -1,16 +1,21 @@
 package Modelo;
-
+import java.util.List;
+import java.util.ArrayList;
 public class Dieta {
-    private Comida[] comidas;
+	private String nombre;
+    private List<Comida> comidas;
 	private String tipo;
-    public Dieta(Comida[] comidas,String tipo){
-		this.comidas=comidas;
+    public Dieta(String nombre,String tipo){
+		this.nombre=nombre;
 		this.tipo=tipo;
+		this.comidas=new ArrayList<>();
     }
-    public Comida[] obtenerMenu(){
+    public List<Comida> obtenerMenu(){
 		return this.comidas;
     }
-
+	public void add(Comida comida){
+		this.comidas.add(comida);
+	}
     public int CalcularCaloriasTotales(){
 		int grasasTotales=0,proteinasTotales=0,carbohidratosTotales=0;
 		for (Comida laComida:comidas){
@@ -21,7 +26,7 @@ public class Dieta {
 		return (proteinasTotales*4)+(grasasTotales*9)+(carbohidratosTotales*4);
     }
 
-	public Comida[] getComidas() {
+	public List<Comida> getComidas() {
 		return comidas;
 	}
 
@@ -29,12 +34,20 @@ public class Dieta {
 		return tipo;
 	}
 
-	public void setComidas(Comida[] comidas) {
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setComidas(List<Comida> comidas) {
 		this.comidas = comidas;
 	}
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }
