@@ -11,22 +11,23 @@ public class PrincipalSubController {
     //Los cuidadores que Existen
     private List<Cuidador> cuidadores;
     //Cuidador Que se asignara
-    private List<Animal> animalesColeccion;
+    private JList<Animal> animalesColeccion;
     private Cuidador cuidadorAsignado;
     private JComboBox<String> selectorTipo;
+    DefaultListModel<Animal> sensorAnimal = new DefaultListModel<>();
     public PrincipalSubController(){
         datosAnimal = new ArrayList<>();
         datosReq = new ArrayList<>();
         cuidadores = new ArrayList<>();
-        animalesColeccion = new ArrayList<>();
+        animalesColeccion = new JList<>(sensorAnimal);
 
         //Animales por Defecto
         Carnivoro leo = new Carnivoro("Leo", "León", 300, 50, 100);
         Omnivoro mel = new Omnivoro("Mel", "Osa", 200, 200, 100);
         Herviboro bambi = new Herviboro("Bambi", "Ciervo", 100, 400, 50);
-        animalesColeccion.add(mel);
-        animalesColeccion.add(bambi);
-        animalesColeccion.add(leo);
+        sensorAnimal.addElement(mel);
+        sensorAnimal.addElement(bambi);
+        sensorAnimal.addElement(leo);
     }
     public void listenerAgregacion(JButton boton){
         boton.addActionListener(e->{
@@ -68,7 +69,7 @@ public class PrincipalSubController {
             }
             //Añadir animal a Coleccion
             if (nuevoAnimal != null) {
-                animalesColeccion.add(nuevoAnimal);
+                sensorAnimal.addElement(nuevoAnimal);
                 JOptionPane.showMessageDialog(null, "Animal " + nombreAnimal + " agregado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 // 5. Eliminar el texto ingresado
                 for (JTextField textField : datosAnimal) {
@@ -111,7 +112,7 @@ public class PrincipalSubController {
     public void setSelectorTipo(JComboBox<String> selectorTipo) {
         this.selectorTipo = selectorTipo;
     }
-    public List<Animal> getAnimalesColeccion() {
+    public JList<Animal> getAnimalesColeccion() {
         return animalesColeccion;
     }
 }

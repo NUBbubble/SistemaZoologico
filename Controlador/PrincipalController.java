@@ -1,9 +1,5 @@
 package Controlador;
 
-import Modelo.Animal;
-import Modelo.Carnivoro;
-import Modelo.Herviboro;
-import Modelo.Omnivoro;
 import Vista.BarraLateralView;
 import Vista.MenuEncabezadoView;
 import Vista.PrincipalView;

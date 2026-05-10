@@ -1,11 +1,9 @@
 package Vista;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import Modelo.Cuidador;
 import Controlador.DietasController;
-import Controlador.PrincipalController;
 import Controlador.PrincipalSubController;
 
 import java.awt.*;

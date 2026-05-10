@@ -29,27 +29,31 @@ public class BarraLateralView extends JPanel{
         g.setColor(BACKGROUND);
         g.fillRect(0,0,getWidth(),getHeight());
     }
-    public void crearSelecciones(List<Animal> misAnimales){
-        
-        JPanel panel= new JPanel(new GridLayout(misAnimales.size(),1));
-        panel.setPreferredSize(new Dimension(WIDTH,(misAnimales.size()*50)));
-        
-        for (Animal animal:misAnimales){
-            panel.add(crearSeleccion(animal));
-        }
-        add(panel);
-    }
+    public void crearSelecciones(JList<Animal> misAnimales) {
+        ListModel<Animal> modelo = misAnimales.getModel();
+        int cantidad = modelo.getSize();
 
-    public JPanel crearSeleccion(Animal animal){
-        JPanel seleccion=new JPanel(new GridLayout(1, 2));
-        seleccion.setPreferredSize(new Dimension(WIDTH, ALTURA_DE_SELECCION));
+        JPanel panel = new JPanel(new GridLayout(cantidad, 1, 0, 5)); 
+            panel.setPreferredSize(new Dimension(WIDTH, (cantidad * 50))); 
+
+            for (int i = 0; i < cantidad; i++) {
+                Animal animal = modelo.getElementAt(i);
+                panel.add(crearSeleccion(animal));
+            }
+        add(panel); 
+        revalidate();
+        repaint();
+    }
+    public JPanel crearSeleccion(Animal animal) {
+        JPanel seleccion = new JPanel(new GridLayout(1, 2));
+            seleccion.setPreferredSize(new Dimension(WIDTH, ALTURA_DE_SELECCION)); 
             seleccion.setBackground(Color.WHITE);
             seleccion.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(185,200,197)),
-                BorderFactory.createEmptyBorder(5,15,5,15)
+                BorderFactory.createLineBorder(new Color(185, 200, 197)),
+                BorderFactory.createEmptyBorder(5, 15, 5, 15)
             ));
-        //Creacion de botones
-        JButton boton=new JButton(animal.getNombre());
+
+        JButton boton = new JButton(animal.getNombre());
             boton.setPreferredSize(new Dimension(1,ALTURA_DE_BOTON));
             boton.setBackground(Color.WHITE);
             boton.setBorderPainted(false);
@@ -58,19 +62,20 @@ public class BarraLateralView extends JPanel{
             boton.setHorizontalAlignment(SwingConstants.LEFT);
             boton.setFont(new Font("Arial", Font.BOLD, 12));
             boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            controlador.addButton(boton);
-        //Creacion Del Texto Especie
-        JLabel especie= new JLabel(animal.getEspecie());
-            especie.setPreferredSize(new Dimension((WIDTH/3)*2,ALTURA_DE_BOTON));
+
+        controlador.addButton(boton);
+
+        JLabel especie = new JLabel(animal.getEspecie());
+            especie.setPreferredSize(new Dimension((WIDTH/3)*2,ALTURA_DE_BOTON)); 
             especie.setOpaque(true);
             especie.setBackground(Color.WHITE);
-            especie.setForeground(new Color(85,95,92));
+            especie.setForeground(new Color(85, 95, 92));
             especie.setFont(new Font("Arial", Font.PLAIN, 12));
             especie.setHorizontalAlignment(SwingConstants.RIGHT);
-        seleccion.add(boton);
-        seleccion.add(especie);
+            seleccion.add(boton);
+            seleccion.add(especie);
+
         return seleccion;
     }
-
 }
 
