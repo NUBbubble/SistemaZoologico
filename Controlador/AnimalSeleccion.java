@@ -8,23 +8,30 @@ import Modelo.Animal;
 public class AnimalSeleccion {
     private List<JButton> botones;
     private JList<Animal> animales;
-    private DefaultListModel<Animal> modelo; 
+    private DefaultListModel<Animal> modelo;
+
     public AnimalSeleccion() {
         this.botones = new ArrayList<>();
         this.modelo = new DefaultListModel<>();
-        this.animales = new JList<>(modelo); 
+        this.animales = new JList<>(modelo);
+    }
+
+    public void setModelo(DefaultListModel<Animal> modeloExterno) {
+        this.modelo = modeloExterno;
+        this.animales = new JList<>(modelo);
     }
 
     public void addAnimales(Animal animalEnviado) {
         modelo.addElement(animalEnviado);
     }
-public void addAnimales(JList<Animal> lista) {
-    ListModel<Animal> modeloRecibido = lista.getModel();
-    for (int i = 0; i < modeloRecibido.getSize(); i++) {
-        Animal animal = modeloRecibido.getElementAt(i);
-        this.modelo.addElement(animal);
+
+    public void addAnimales(JList<Animal> lista) {
+        ListModel<Animal> modeloRecibido = lista.getModel();
+        for (int i = 0; i < modeloRecibido.getSize(); i++) {
+            Animal animal = modeloRecibido.getElementAt(i);
+            this.modelo.addElement(animal);
+        }
     }
-}
 
     public void setListaAnimales(JList<Animal> animalesEnviados) {
         this.animales = animalesEnviados;

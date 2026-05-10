@@ -12,16 +12,16 @@ public class PrincipalController {
     private PrincipalSubController controladorPrincipal;
 
     public PrincipalController(){
-        vistaPrincipal=new PrincipalView(controladorPrincipal);
-        controladorBarraLateral=new AnimalSeleccion();
-        controladorMenu=new MenuController(vistaPrincipal);
-        controladorDietas=new DietasController();
-        controladorPrincipal=new PrincipalSubController();
+        controladorPrincipal = new PrincipalSubController();
+        vistaPrincipal = new PrincipalView(controladorPrincipal);
+        controladorBarraLateral = new AnimalSeleccion();
+        controladorBarraLateral.setModelo(controladorPrincipal.getModeloAnimales());
+        controladorMenu = new MenuController(vistaPrincipal);
+        controladorDietas = new DietasController();
         vistaPrincipal.setDietasController(controladorDietas);
     }
 
     public void iniciar(){
-        controladorBarraLateral.addAnimales(controladorPrincipal.getAnimalesColeccion());
         vistaPrincipal.agregarBarraLateral(new BarraLateralView(controladorBarraLateral));
         vistaPrincipal.agregarMenu(new MenuEncabezadoView(controladorMenu));
         vistaPrincipal.mostrarVentana();

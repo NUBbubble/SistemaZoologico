@@ -15,7 +15,6 @@ public class PrincipalView extends JFrame{
     private DietasController dietasController;
     private PrincipalSubController controlador;
         public PrincipalView(PrincipalSubController controlador){
-            controlador = new PrincipalSubController();
             this.controlador=controlador;
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setTitle("Gestion De Alimentacion - Zoologico ");

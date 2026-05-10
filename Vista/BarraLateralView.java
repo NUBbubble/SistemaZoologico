@@ -2,7 +2,8 @@ package Vista;
 
 import java.awt.*;
 import javax.swing.*;
-
+import javax.swing.event.ListDataListener;
+import javax.swing.event.ListDataEvent;
 import java.util.List;
 import Modelo.Animal;
 
@@ -10,14 +11,37 @@ import Controlador.AnimalSeleccion;
 
 public class BarraLateralView extends JPanel{
     private final int WIDTH=300;
-    private final int ALTURA_DE_SELECCION=30,ALTURA_DE_BOTON=20; 
+    private final int ALTURA_DE_SELECCION=30,ALTURA_DE_BOTON=20;
     private final Color BACKGROUND=new Color(220,230,228);
     private AnimalSeleccion controlador;
+    private JList<Animal> listaAnimales;
 
     public BarraLateralView(AnimalSeleccion controlador){
         setPreferredSize(new Dimension(WIDTH,800));
         this.controlador=controlador;
-        crearSelecciones(controlador.getAnimales());
+        this.listaAnimales = controlador.getAnimales();
+        crearSelecciones(listaAnimales);
+        listaAnimales.getModel().addListDataListener(new ListDataListener() {
+            @Override
+            public void intervalAdded(ListDataEvent e) {
+                actualizarBarra();
+            }
+            @Override
+            public void intervalRemoved(ListDataEvent e) {
+                actualizarBarra();
+            }
+            @Override
+            public void contentsChanged(ListDataEvent e) {
+                actualizarBarra();
+            }
+        });
+    }
+
+    public void actualizarBarra() {
+        removeAll();
+        crearSelecciones(listaAnimales);
+        revalidate();
+        repaint();
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -35,7 +59,6 @@ public class BarraLateralView extends JPanel{
 
         JPanel panel = new JPanel(new GridLayout(cantidad, 1, 0, 5)); 
             panel.setPreferredSize(new Dimension(WIDTH, (cantidad * 50))); 
-
             for (int i = 0; i < cantidad; i++) {
                 Animal animal = modelo.getElementAt(i);
                 panel.add(crearSeleccion(animal));

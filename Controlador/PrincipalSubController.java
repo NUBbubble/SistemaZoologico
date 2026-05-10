@@ -115,4 +115,8 @@ public class PrincipalSubController {
     public JList<Animal> getAnimalesColeccion() {
         return animalesColeccion;
     }
+
+    public DefaultListModel<Animal> getModeloAnimales() {
+        return sensorAnimal;
+    }
 }
