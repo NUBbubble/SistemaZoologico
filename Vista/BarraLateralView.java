@@ -63,6 +63,7 @@ public class BarraLateralView extends JPanel{
                 Animal animal = modelo.getElementAt(i);
                 panel.add(crearSeleccion(animal));
             }
+        controlador.listenerButton();
         add(panel); 
         revalidate();
         repaint();

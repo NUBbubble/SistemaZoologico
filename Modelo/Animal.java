@@ -75,6 +75,9 @@ public abstract class Animal {
     public Cuidador getCuidador() {
         return cuidador;
     }
+    public String getTipo() {
+        return this.getClass().getSimpleName();
+    }
     //  setters
     public void setCaloriasCons(int caloriasCons) {
         this.caloriasCons = caloriasCons;

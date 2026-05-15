@@ -71,7 +71,6 @@ public class PrincipalSubController {
             if (nuevoAnimal != null) {
                 sensorAnimal.addElement(nuevoAnimal);
                 JOptionPane.showMessageDialog(null, "Animal " + nombreAnimal + " agregado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                // 5. Eliminar el texto ingresado
                 for (JTextField textField : datosAnimal) {
                     textField.setText("");
                 }

@@ -14,6 +14,7 @@ public class PrincipalView extends JFrame{
     private JComboBox<String> selectorTipo;
     private DietasController dietasController;
     private PrincipalSubController controlador;
+
         public PrincipalView(PrincipalSubController controlador){
             this.controlador=controlador;
             setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,6 +50,7 @@ public class PrincipalView extends JFrame{
             panelContenido.revalidate();
             panelContenido.repaint();
         }
+
         public JPanel solicitarDatosAnimal(){
             JPanel panel=new JPanel(new GridLayout(11,1,0,10));
             panel.setOpaque(false);
@@ -219,5 +221,14 @@ public class PrincipalView extends JFrame{
             panelContenido.add(new ReportesView(), BorderLayout.CENTER);
             panelContenido.revalidate();
             panelContenido.repaint();
+        }
+        public void mostrarReporte(JPanel reporte){
+            panelContenido.removeAll();
+            panelContenido.add(reporte, BorderLayout.CENTER);
+            panelContenido.revalidate();
+            panelContenido.repaint();
+        }
+        public void añadirPanel(JPanel panel){
+            add(panel);
         }
 }

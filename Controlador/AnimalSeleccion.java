@@ -4,18 +4,40 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import Modelo.Animal;
+import Vista.PrincipalView;
 
 public class AnimalSeleccion {
     private List<JButton> botones;
     private JList<Animal> animales;
     private DefaultListModel<Animal> modelo;
+    private ReportesController controladorReport;
+    private PrincipalView vistaPrincipal;
 
     public AnimalSeleccion() {
         this.botones = new ArrayList<>();
         this.modelo = new DefaultListModel<>();
         this.animales = new JList<>(modelo);
+        this.controladorReport = new ReportesController();
+    }
+    public void setVistaPrincipal(PrincipalView vistaPrincipal) {
+        this.vistaPrincipal = vistaPrincipal;
     }
 
+    public void listenerButton() {
+        for (int i = 0; i < botones.size(); i++) {
+            int index = i;
+            botones.get(index).addActionListener(e -> {
+                String text = botones.get(index).getText();
+                for (int j = 0; j < modelo.getSize(); j++) {
+                    if (modelo.get(j).getNombre().equals(text)) {
+                        controladorReport.setAnimal(modelo.get(j));
+                        JPanel reportePanel = controladorReport.mostrarReporteAnimal();
+                        vistaPrincipal.mostrarReporte(reportePanel);
+                    }
+                }
+            });
+        }
+    }
     public void setModelo(DefaultListModel<Animal> modeloExterno) {
         this.modelo = modeloExterno;
         this.animales = new JList<>(modelo);
